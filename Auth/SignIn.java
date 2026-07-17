@@ -19,7 +19,7 @@ public class SignIn {
 
         // ============ IMAGE BACKGROUND ============== //
 
-        ImageIcon icon = new ImageIcon("Auth/images.jpeg");
+        ImageIcon icon = new ImageIcon("Auth/image.png");
         Image img = icon.getImage().getScaledInstance(
                 1300, 700, Image.SCALE_SMOOTH);
 
@@ -51,18 +51,18 @@ public class SignIn {
         // =============== JTEXTFEILD NAME LOGIC =============== //
 
         JTextField email = new JTextField();
-        email.setText("Enter your name");
+        email.setText("Enter your Email");
 
         email.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
-                if (email.getText().equals("Enter your name")) {
+                if (email.getText().equals("Enter your Email")) {
                     email.setText("");
                 }
             }
 
             public void focusLost(FocusEvent e) {
                 if (email.getText().trim().isEmpty()) {
-                    email.setText("Enter your name");
+                    email.setText("Enter your Email");
                     email.setForeground(Color.GRAY);
                 }
             }
@@ -106,7 +106,7 @@ public class SignIn {
         button.setBackground(Color.BLUE);
         button.setText("Sign In");
         button.setForeground(Color.WHITE);
-
+        button.setFont(new Font("Arial" , Font.BOLD , 18));
         button.addActionListener(e -> {
 
             String userEmail = email.getText().trim();

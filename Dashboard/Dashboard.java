@@ -4,17 +4,12 @@ import javax.swing.*;
 import Auth.SignIn;
 import java.awt.*;
 
-
 public class Dashboard {
 
-    public Dashboard(String fullName) {        
-           
+    public Dashboard(String fullName) {
+
         // =================== DISPLAY NAME ====================== //
-        JLabel label = new JLabel();
-        label.setLayout(null);
-        label.setBounds(450 , 90,150,30);
-        label.setText(fullName);
-        label.setForeground(Color.BLACK);
+        JLabel welComLabel = label(fullName, 20);
 
         // =================== JFRAME =========================== //
         JFrame frame = new JFrame("DASHBOARD");
@@ -23,66 +18,86 @@ public class Dashboard {
         frame.setSize(700, 800);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(label);
+        frame.add(welComLabel);
 
         // ================== JPANEL ==================== //
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(450, 100, 400, 500);
-        panel.setBackground(Color.WHITE);
+        panel.setBackground(Color.BLACK);
         frame.add(panel);
 
-        // ===================== WITHDRAW CASH BUTTON ============== //
+        // ===================== BACKGROUND IMAGE ==================== //
+        ImageIcon icon = new ImageIcon("Dashboard/image.png");
+        Image img = icon.getImage();
+        Image resize = img.getScaledInstance(1300, 700, Image.SCALE_SMOOTH);
+        ImageIcon newIcon = new ImageIcon(resize);
+        JLabel imageLabel = new JLabel(newIcon);
+        imageLabel.setBounds(0, 0, 1300, 700);
+        frame.add(imageLabel);
+
+        // ===================== MENU ============== //
         JButton wB = button("Menu", 50);
-        wB.addActionListener(e->{
+        wB.addActionListener(e -> {
             // new WithdrawCash();
             frame.dispose();
         });
         panel.add(wB);
-        // ===================== ADD CASH BUTTON ============== //
+        // ===================== BOOK A ROOM ============== //
         JButton aB = button("Resturent", 120);
-        aB.addActionListener(e->{
+        aB.addActionListener(e -> {
             // new AddCash();
             frame.dispose();
         });
         panel.add(aB);
-        // ===================== CHECK CASH BUTTON ============== //
+        // ===================== ABOUT HOTEL HISTORY ============== //
         JButton cB = button("Check Cash", 200);
-        cB.addActionListener(e->{
+        cB.addActionListener(e -> {
             // new CheckCash();
             frame.dispose();
         });
         panel.add(cB);
         // ===================== SEND CASH BUTTON ============== //
         JButton sB = button("Transfer Cash", 280);
-        sB.addActionListener(e->{
+        sB.addActionListener(e -> {
             // new TransferCash();
             frame.dispose();
         });
         panel.add(sB);
-        // ===================== BACK  BUTTON ============== //
+        // ===================== BACK BUTTON ============== //
         JButton bB = button("Back", 360);
+        bB.setBounds(50 , 360,300,35);
         bB.setBackground(Color.BLUE);
-        bB.addActionListener(e->{
+        bB.addActionListener(e -> {
 
             new SignIn();
             frame.dispose();
         });
         panel.add(bB);
 
-
     }
 
     // ========================= JBUTTON LOGIC METHOD ========================//
-    JButton button(String text , int y)
-    {
+    public JButton button(String text, int y) {
         JButton btn = new JButton(text);
         btn.setLayout(null);
-        btn.setBounds(100 , y , 200 , 30 );
+        btn.setBounds(100, y, 200, 30);
         btn.setBackground(Color.DARK_GRAY);
         btn.setForeground(Color.WHITE);
-        btn.setFont(new Font("Arial" , Font.BOLD , 17));
+        btn.setFont(new Font("Arial", Font.BOLD, 17));
 
         return btn;
+    }
+
+    // ========================= JLABEL METHOD ========================= //
+    public JLabel label(String text, int y)
+
+    {
+        JLabel lbl = new JLabel(text);
+        lbl.setLayout(null);
+        lbl.setForeground(Color.BLACK);
+        lbl.setFont(new Font("ARAIL", Font.BOLD, 25));
+        lbl.setBounds(500, y, 500, 30);
+        return lbl;
     }
 }
