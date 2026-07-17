@@ -15,7 +15,7 @@ public class SignIn {
 
         JFrame frame = new JFrame();
         frame.setTitle("Online Store");
-        frame.setSize(900, 700);
+        frame.setSize(1300, 1300);
 
         // ============ IMAGE BACKGROUND ============== //
 

@@ -15,7 +15,7 @@ public class Dashboard {
         JFrame frame = new JFrame("DASHBOARD");
         frame.getContentPane().setBackground(new Color(91, 44, 111));
         frame.setVisible(true);
-        frame.setSize(700, 800);
+        frame.setSize(1300, 1300);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(welComLabel);
@@ -51,9 +51,9 @@ public class Dashboard {
         });
         panel.add(aB);
         // ===================== ABOUT HOTEL HISTORY ============== //
-        JButton cB = button("Check Cash", 200);
+        JButton cB = button("Hotel History", 200);
         cB.addActionListener(e -> {
-            // new CheckCash();
+            new HotelHistory();
             frame.dispose();
         });
         panel.add(cB);

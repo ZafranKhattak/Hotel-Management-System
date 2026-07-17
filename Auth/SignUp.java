@@ -11,7 +11,7 @@ public class SignUp {
     public SignUp() {
 
         JFrame frame = new JFrame("Sign Up");
-        frame.setSize(900, 700);
+        frame.setSize(1200, 1300);
         frame.getContentPane().setBackground(new Color(18, 18, 18));
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
