@@ -12,16 +12,18 @@ public class Dashboard {
         // =================== DISPLAY NAME ====================== //
         JLabel label = new JLabel();
         label.setLayout(null);
-        label.setBounds(450 , 20,150,30);
+        label.setBounds(450 , 90,150,30);
         label.setText(fullName);
         label.setForeground(Color.BLACK);
 
+        // =================== JFRAME =========================== //
         JFrame frame = new JFrame("DASHBOARD");
         frame.getContentPane().setBackground(new Color(91, 44, 111));
         frame.setVisible(true);
         frame.setSize(700, 800);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(label);
 
         // ================== JPANEL ==================== //
         JPanel panel = new JPanel();
@@ -31,14 +33,14 @@ public class Dashboard {
         frame.add(panel);
 
         // ===================== WITHDRAW CASH BUTTON ============== //
-        JButton wB = button("WithDraw Cash", 50);
+        JButton wB = button("Menu", 50);
         wB.addActionListener(e->{
             // new WithdrawCash();
             frame.dispose();
         });
         panel.add(wB);
         // ===================== ADD CASH BUTTON ============== //
-        JButton aB = button("ADD Cash", 120);
+        JButton aB = button("Resturent", 120);
         aB.addActionListener(e->{
             // new AddCash();
             frame.dispose();

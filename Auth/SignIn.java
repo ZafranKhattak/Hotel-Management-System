@@ -1,6 +1,6 @@
 package Auth;
 
-// import Dashboard.Dashboard;
+import Dashboard.Dashboard;
 import java.sql.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
@@ -119,11 +119,11 @@ public class SignIn {
 
             try {
                 Connection connection = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/ONLINE_QUIZ",
+                        "jdbc:mysql://localhost:3306/hotel",
                         "root",
                         "ZafranKhan@06");
 
-                String query = "SELECT * FROM USERS WHERE EMAIL = ? AND PASSWORD = ?";
+                String query = "SELECT first_name , last_name FROM USERS WHERE EMAIL = ? AND PASSWORD = ?";
 
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setString(1, userEmail);
@@ -132,8 +132,9 @@ public class SignIn {
                 ResultSet rs = statement.executeQuery();
 
                 if (rs.next()) {
-                    JOptionPane.showMessageDialog(null, "Login Successful");
-                    // new Dashboard();
+                    String fullName = "Welcome Dear, " + rs.getString("first_name") + " " + rs.getString("last_name");
+                    System.out.println(fullName);
+                    new Dashboard(fullName);
                     frame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Email or Password");
