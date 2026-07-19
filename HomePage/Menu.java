@@ -1,4 +1,4 @@
-package Dashboard;
+package HomePage;
 
 import javax.swing.*;
 import java.awt.*;

@@ -2,6 +2,9 @@ package Auth;
 
 import java.sql.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -17,7 +20,7 @@ public class SignUp {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // =========== Scale image =========== //
-        ImageIcon icon = new ImageIcon("Auth/a.jpg");
+        ImageIcon icon = new ImageIcon("Auth/b.jpg");
         Image img = icon.getImage().getScaledInstance(
                 1300, 700, Image.SCALE_SMOOTH);
 
@@ -28,7 +31,7 @@ public class SignUp {
         // =========== Panel =========== //
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(450, 45, 450, 600);
+        panel.setBounds(450, 25, 450, 670);
         panel.setBackground(new Color(30, 30, 30));
 
         // =========== Label CREATE ACCOUNT =========== //
@@ -95,14 +98,29 @@ public class SignUp {
         email.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         email.setBorder(new LineBorder(new Color(80, 80, 80), 3, true));
 
-        // =============== PASSWORD =========== //
+        // ========================== CNIC FIELD ====================//
+        JLabel l = new JLabel();
+        l.setText("CNIC:");
+        l.setBounds(80 , 330 , 100 , 30);
+        l.setForeground(Color.WHITE);
+        l.setFont(new Font("Arial" , Font.BOLD , 15));
+        JTextField cnic = new JTextField();
+        cnic.setBounds(80, 355,  280, 35);
+        cnic.setBackground(new Color(45, 45, 45));
+        cnic.setForeground(Color.WHITE);
+        cnic.setCaretColor(Color.WHITE);
+        cnic.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        cnic.setBorder(new LineBorder(new Color(80, 80, 80), 3, true));
+        panel.add(l);
+        panel.add(cnic);
+        // =============== PASSWORD =================== //
         JLabel l5 = new JLabel();
         l5.setText("Password:");
-        l5.setBounds(80,320 , 100 , 30);
+        l5.setBounds(80,390 , 100 , 30);
         l5.setForeground(Color.WHITE);
         l5.setFont(new Font("Arial" , Font.BOLD , 15));
         JPasswordField password = new JPasswordField();
-        password.setBounds(80, 350,  280, 35);
+        password.setBounds(80, 420,  280, 35);
         password.setBackground(new Color(45, 45, 45));
         password.setForeground(Color.WHITE);
         password.setCaretColor(Color.WHITE);
@@ -112,11 +130,11 @@ public class SignUp {
         // ================= CONFIRM PASSWORD ============== //
         JLabel l6 = new JLabel();
         l6.setText("Confirm Password:");
-        l6.setBounds(80 , 380 , 170 , 30);
+        l6.setBounds(80 , 470 , 170 , 30);
         l6.setForeground(Color.WHITE);
         l6.setFont(new Font("Arial" , Font.BOLD , 15));
         JPasswordField confirmPass = new JPasswordField();
-        confirmPass.setBounds(80, 410,  280, 35);
+        confirmPass.setBounds(80, 500,  280, 35);
         confirmPass.setBackground(new Color(45, 45, 45));
         confirmPass.setForeground(Color.WHITE);
         confirmPass.setCaretColor(Color.WHITE);
@@ -127,7 +145,7 @@ public class SignUp {
 
         JButton button = new JButton();
         button.setText("Sign Up");
-        button.setBounds(80, 470, 300, 45);
+        button.setBounds(80, 550, 300, 45);
         button.setBackground(Color.blue);
         button.setFont(new Font("Arial", Font.BOLD, 15));
         button.setForeground(Color.white);
@@ -140,7 +158,7 @@ public class SignUp {
             String userEmail = email.getText().trim();
             String userPassword = String.valueOf(password.getPassword());
             String confirmPassword = String.valueOf(confirmPass.getPassword());
-
+            String userCnic = cnic.getText().trim();
             if (userFirstName.isEmpty())
             {
                 JOptionPane.showMessageDialog(null , "First Name is required");
@@ -163,7 +181,11 @@ public class SignUp {
                 JOptionPane.showMessageDialog(null , "Email is required");
                 return;
             }
-
+            if(userCnic.length()!=13)
+            {
+                JOptionPane.showMessageDialog(null, "Enter a valid CNICC");
+                return;
+            }
             if (userPassword.isEmpty())
             {
                 JOptionPane.showMessageDialog(null , "password is required");
@@ -186,7 +208,7 @@ public class SignUp {
                         "root",
                         "ZafranKhan@06");
 
-                String query = "INSERT INTO Users(first_name, middle_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)";
+                String query = "INSERT INTO Users(first_name, middle_name, last_name, email,cnic, password) VALUES (?, ?, ?, ?, ?,?)";
 
                 PreparedStatement statement = connection.prepareStatement(query);
 
@@ -194,12 +216,15 @@ public class SignUp {
                 statement.setString(2, userMiddleName);
                 statement.setString(3, userLastName);
                 statement.setString(4, userEmail);
-                statement.setString(5, userPassword);
+                statement.setString(5, userCnic);
+                statement.setString(6, userPassword);
 
                 int rows = statement.executeUpdate();
 
                 if (rows > 0) {
+
                     JOptionPane.showMessageDialog(null, "Account Created Successfully");
+                    new SignIn();
                 } else {
                     JOptionPane.showMessageDialog(null, "Failed to Create Account");
                 }
@@ -217,7 +242,7 @@ public class SignUp {
 
         JButton btn = new JButton();
         btn.setText("Sign In");
-        btn.setBounds(80, 520, 300, 45);
+        btn.setBounds(80, 600, 300, 45);
         btn.setBackground(Color.red);
         btn.setFont(new Font("Arial", Font.BOLD, 15));
         btn.setForeground(Color.black);

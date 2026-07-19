@@ -1,6 +1,6 @@
 package Auth;
 
-import Dashboard.Dashboard;
+import HomePage.HomePage;
 import java.sql.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
@@ -132,9 +132,8 @@ public class SignIn {
                 ResultSet rs = statement.executeQuery();
 
                 if (rs.next()) {
-                    String fullName = "Welcome Dear, " + rs.getString("first_name") + " " + rs.getString("last_name");
-                    System.out.println(fullName);
-                    new Dashboard(fullName);
+                    
+                    new HomePage();
                     frame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Email or Password");
