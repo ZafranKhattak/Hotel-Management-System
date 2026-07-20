@@ -15,7 +15,7 @@ public class HomePage {
         frame.setLayout(null);
 
         // ================== ABOUT ======================= //
-        JLabel aboutLabel = label("About", 100, 30, 120, 30, Color.WHITE);
+        JLabel aboutLabel = label("About Hotel", 100, 30, 180, 30, Color.WHITE);
         aboutLabel.addMouseListener(new MouseAdapter() {
             
             public void mouseEntered(MouseEvent e)
@@ -27,23 +27,33 @@ public class HomePage {
         frame.add(aboutLabel);
 
         // ================== Branches ======================= //
-        JLabel branchesLabel = label("Branches", 
-                                    200, 
+        JLabel branchesLabel = label("Hotel Branches", 
+                                    250, 
                                     30, 
-                                    120,
+                                    180,
                                     30, 
                                     Color.WHITE
                                 );
         branchesLabel.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e)
             {
-                // new Branches();
+                new HotelBranches();
                 frame.dispose();
             }
         });
         frame.add(branchesLabel);
 
-        // ===================
+        // ================== DASHOARD ========================== //
+        JLabel dashboardLabel = label("Dashboard", 430, 30, 120, 30, Color.WHITE);
+        dashboardLabel.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e)
+            {
+                new Dashboard();
+                frame.dispose();
+            }
+        });
+        frame.add(dashboardLabel);
+
         // ================== About Infracture ==================== //
 
         String text = """             
@@ -67,7 +77,7 @@ public class HomePage {
                 450,
                 290,
                 Color.YELLOW);
-        Timer timer = new Timer(10, null);
+        Timer timer = new Timer(100, null);
         timer.addActionListener(new ActionListener() {
 
             int index = 0;
@@ -96,6 +106,30 @@ public class HomePage {
         label.setBounds(900, 150, 200, 250);
         frame.add(label);
 
+        String imges[][] = {
+                 {
+                "HomePage/dinner.png"  , "HomePage/front.png",
+                "HomePage/hotelName.png" , "HomePage/location.png"
+                 },
+                 {
+                    "HomePage/image.png" , "HomePage/reception.png" ,
+                    "HomePage/room.png" , "HomePage/owner.jpg"
+                 }
+        };
+
+         for (int i=0; i<imges.length; i++)
+        {            
+            ImageIcon ic = new ImageIcon();
+            Image im = ic.getImage().getScaledInstance(200, 300, Image.SCALE_SMOOTH);
+            JLabel label2 = new JLabel(new ImageIcon(im));
+            for (int j=0; j<4; j++)
+            {
+                label2.setText(imges[i][j]);
+                label2.setBounds(100+(j*50) , 300 +(j*50) , 200 , 300);
+            }
+            frame.add(label2);
+        }
+        
     }
 
     // ======================== LABEL METHOD LOGIC ====================== //
@@ -115,4 +149,5 @@ public class HomePage {
 
         return lbl;
     }
+
 }
