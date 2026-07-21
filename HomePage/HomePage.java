@@ -5,78 +5,61 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class HomePage {
-
     public HomePage() {
-        JFrame frame = new JFrame("History");
-        frame.setVisible(true);
-        frame.getContentPane().setBackground(Color.BLACK);
-        frame.setSize(1300, 1300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // ================== JFRAME ====================== //
+
+        JFrame frame = new JFrame("HOMEPAGE");
+        frame.setSize(1300, 700);
         frame.setLayout(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
 
-        // ================== ABOUT ======================= //
-        JLabel aboutLabel = label("About Hotel", 100, 30, 180, 30, Color.WHITE);
-        aboutLabel.addMouseListener(new MouseAdapter() {
-            
-            public void mouseEntered(MouseEvent e)
-            {
-                // new AboutHotel();
-                frame.dispose();
-            }   
-        });
-        frame.add(aboutLabel);
+        // ================== PANEL ======================= //
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBounds(0, 0, 1280, 700);
+        panel.setBackground(Color.BLACK);
+        panel.setPreferredSize(new Dimension(1280, 700));
+        frame.add(panel);
 
-        // ================== Branches ======================= //
-        JLabel branchesLabel = label("Hotel Branches", 
-                                    250, 
-                                    30, 
-                                    180,
-                                    30, 
-                                    Color.WHITE
-                                );
-        branchesLabel.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e)
-            {
-                new HotelBranches();
-                frame.dispose();
-            }
-        });
-        frame.add(branchesLabel);
+        // ================= SCROLLABLE =================== //
+        JScrollPane scroll = new JScrollPane(panel);
+        scroll.setBounds(0, 0, 1280, 700);
+        scroll.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        // ================== DASHOARD ========================== //
-        JLabel dashboardLabel = label("Dashboard", 430, 30, 120, 30, Color.WHITE);
-        dashboardLabel.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e)
-            {
-                new Dashboard();
-                frame.dispose();
-            }
-        });
-        frame.add(dashboardLabel);
+        scroll.setHorizontalScrollBarPolicy(
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        frame.add(scroll);
 
-        // ================== About Infracture ==================== //
+        // ======================= WELCOME AND ABOUT HOTEL HISTORY TEXT
+        // =================== //
 
-        String text = """             
-                <html>
-                Welcome to Al-Zafran Khan Restaurant,<br>
-                The Legacy of Khan's Family built in 2000<br>
-                Established with a passion for excellence,<br>
-                our hotel proudly continues a tradition of <br>
-                exceptional hospitality. Every guest is welcomed<br>
-                as part of our family and every stay<br>
-                is crafted with care.Its branches are<br>
-                in all over Pakistan.It is famous for its delecious<br>
-                food taste.It is one of the biggest food<br>
-                 bussiness in Pakistan.
-                </html>
+        String text = """
+                    <html>
+                    Welcome to Al-Zafran Khan Hotel, where comfort,<br>
+                    elegance, and heartfelt hospitality come together<br>
+                    to create unforgettable experiences.Established<br>
+                    with a passion for excellence, our hotel is dedicated<br>
+                    to providing every guest with exceptional service,<br>
+                    luxurious accommodations, and a warm, welcoming atmosphere.<br>
+                    Whether you are traveling for business, enjoying a family<br>
+                    vacation, or celebrating a special occasion, we strive<br>
+                    to make every moment of your stay comfortable and memorable.<br>
+                    Thank you for choosing Al-Zafran Khan Hotel. We are honored<br>
+                    to be your home away from home and look forward to making your<br>
+                    stay truly exceptional.Your comfort is our priority, and your<br>
+                    satisfaction is our success.
+                    </html>
                 """;
 
-        JLabel welComeNote = label(text,
+        // ===================== WELCOME NOTE LOGIC ======================== //
+        JLabel label = label(text,
+                0,
                 50,
-                100,
-                450,
-                290,
-                Color.YELLOW);
+                700,
+                700);
+        // ==================== SET TIME FOR THE TEXT ======================= //
         Timer timer = new Timer(100, null);
         timer.addActionListener(new ActionListener() {
 
@@ -84,7 +67,7 @@ public class HomePage {
 
             public void actionPerformed(ActionEvent e) {
                 if (index < text.length()) {
-                    welComeNote.setText(text.substring(0, index + 1));
+                    label.setText(text.substring(0, index + 1));
                     index++;
                 } else {
                     timer.stop();
@@ -93,61 +76,30 @@ public class HomePage {
         });
 
         timer.start();
-        frame.add(welComeNote);
 
-        // ====================== OWNER NAME ================== //
-        JLabel onwerLabel = label("<html> Owner <br>Zafran Khan</br> </html>",
-                950, 70, 300, 100, Color.WHITE);
-        frame.add(onwerLabel);
-        // ====================== IMAGE ====================== //
-        ImageIcon icon = new ImageIcon("HomePage/owner.jpg");
-        Image img = icon.getImage().getScaledInstance(200, 250, Image.SCALE_SMOOTH);
-        JLabel label = new JLabel(new ImageIcon(img));
-        label.setBounds(900, 150, 200, 250);
-        frame.add(label);
+        panel.add(label);
 
-        String imges[][] = {
-                 {
-                "HomePage/dinner.png"  , "HomePage/front.png",
-                "HomePage/hotelName.png" , "HomePage/location.png"
-                 },
-                 {
-                    "HomePage/image.png" , "HomePage/reception.png" ,
-                    "HomePage/room.png" , "HomePage/owner.jpg"
-                 }
-        };
-
-         for (int i=0; i<imges.length; i++)
-        {            
-            ImageIcon ic = new ImageIcon();
-            Image im = ic.getImage().getScaledInstance(200, 300, Image.SCALE_SMOOTH);
-            JLabel label2 = new JLabel(new ImageIcon(im));
-            for (int j=0; j<4; j++)
-            {
-                label2.setText(imges[i][j]);
-                label2.setBounds(100+(j*50) , 300 +(j*50) , 200 , 300);
-            }
-            frame.add(label2);
-        }
-        
     }
 
-    // ======================== LABEL METHOD LOGIC ====================== //
-    JLabel label(String text, int x, int y, int width, int height, Color col) {
-        JLabel lbl = new JLabel(text);
+    // ======================= SHOW TEXT LABEL METHOD LOGIC
+    // ========================= //
+
+    JLabel label(String text, int x, int y, int width, int height) {
+        JLabel lbl = new JLabel();
+
+        lbl.setText(text);
+        lbl.setLayout(null);
         lbl.setBounds(x, y, width, height);
         lbl.setFont(new Font("Arial", Font.BOLD, 18));
-        lbl.setForeground(col);
-        lbl.setLayout(null);
+        lbl.setForeground(Color.WHITE);
         lbl.addMouseListener(new MouseAdapter() {
 
             public void mouseEntered(MouseEvent e) {
+                lbl.setForeground(Color.YELLOW);
                 lbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                
             }
         });
 
         return lbl;
     }
-
 }

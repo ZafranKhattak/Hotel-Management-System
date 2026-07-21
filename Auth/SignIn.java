@@ -1,6 +1,5 @@
 package Auth;
 
-import HomePage.HomePage;
 import java.sql.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
@@ -9,6 +8,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
+import HomePage.HomePage;
+
 
 public class SignIn {
     public SignIn() {
