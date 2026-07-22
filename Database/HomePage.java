@@ -18,6 +18,24 @@
 //         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //         frame.setLayout(null);
 
+//          // ================== PANEL ======================= //
+//         JPanel panel = new JPanel();
+//         panel.setLayout(null);
+//         panel.setBounds(0, 0, 1280, 700);
+//         panel.setBackground(Color.BLACK);
+//         panel.setPreferredSize(new Dimension(1280, 700));
+//         frame.add(panel);
+
+//         // ================= SCROLLABLE =================== //
+//         JScrollPane scroll = new JScrollPane(panel);
+//         scroll.setBounds(0, 0, 1280, 700);
+//         scroll.setVerticalScrollBarPolicy(
+//                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+//         scroll.setHorizontalScrollBarPolicy(
+//                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//         frame.add(scroll);
+
 //         // ================== ABOUT ======================= //
 //         JLabel aboutLabel = label("About Hotel", 100, 30, 180, 30);
 //         aboutLabel.addMouseListener(new MouseAdapter() {
@@ -62,24 +80,27 @@
 
 //         String text = """             
 //                 <html>
-//                 Welcome to Al-Zafran Khan Restaurant,<br>
-//                 The Legacy of Khan's Family built in 2000<br>
-//                 Established with a passion for excellence,<br>
-//                 our hotel proudly continues a tradition of <br>
-//                 exceptional hospitality. Every guest is welcomed<br>
-//                 as part of our family and every stay<br>
-//                 is crafted with care.Its branches are<br>
-//                 in all over Pakistan.It is famous for its delecious<br>
-//                 food taste.It is one of the biggest food<br>
-//                 bussiness in Pakistan.
+//                 Welcome to Al-Zafran Khan Hotel, where comfort,<br>
+//                 elegance, and heartfelt hospitality come together<br>
+//                 to create unforgettable experiences.Established<br>
+//                 with a passion for excellence, our hotel is dedicated<br>
+//                 to providing every guest with exceptional service,<br>
+//                 luxurious accommodations, and a warm, welcoming atmosphere.<br>
+//                 Whether you are traveling for business, enjoying a family<br>
+//                 vacation, or celebrating a special occasion, we strive<br>
+//                 to make every moment of your stay comfortable and memorable.<br>
+//                 Thank you for choosing Al-Zafran Khan Hotel. We are honored<br>
+//                 to be your home away from home and look forward to making your<br>
+//                 stay truly exceptional.Your comfort is our priority, and your<br>
+//                 satisfaction is our success.
 //                 </html>
 //                 """;
 
 //         JLabel welComeNote = label(text,
 //                 50,
 //                 100,
-//                 450,
-//                 290
+//                 650,
+//                 490
 //                 );
 //         Timer timer = new Timer(100, null);
 //         timer.addActionListener(new ActionListener() {
