@@ -57,10 +57,10 @@ public class HomePage {
         panel.add(branchesLabel);
 
         // ================== DASHOARD ========================== //
-        JLabel dashboardLabel = label("Dashboard", 430, 30, 120, 30);
+        JLabel dashboardLabel = label("Menu", 430, 30, 120, 30);
         dashboardLabel.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                new Dashboard();
+                new Menu();
                 frame.dispose();
             }
         });
