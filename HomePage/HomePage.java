@@ -56,17 +56,27 @@ public class HomePage {
         });
         panel.add(branchesLabel);
 
-        // ================== DASHOARD ========================== //
-        JLabel dashboardLabel = label("Menu", 430, 30, 120, 30);
-        dashboardLabel.addMouseListener(new MouseAdapter() {
+        // ================== Menu ========================== //
+        JLabel menuLabel = label("Menu", 430, 30, 120, 30);
+        menuLabel.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 new Menu();
                 frame.dispose();
             }
         });
+        panel.add(menuLabel);
+
+        // ================== Dashboard ========================== //
+        JLabel dashboardLabel = label("Dashboard", 630, 30, 120, 30);
+        dashboardLabel.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                new Dashboard();
+                frame.dispose();
+            }
+        });
         panel.add(dashboardLabel);
 
-        // ================== About Infracture ==================== //
+        // ================== Welcome Note ==================== //
 
         String text = """
                 <html>
