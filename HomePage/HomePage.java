@@ -1,10 +1,6 @@
 package HomePage;
 
 import javax.swing.*;
-
-import HomePage.Dashboard;
-import HomePage.HotelBranches;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -13,17 +9,16 @@ public class HomePage {
     public HomePage() {
         JFrame frame = new JFrame("History");
         frame.setVisible(true);
-        frame.getContentPane().setBackground(Color.BLACK);
         frame.setSize(1300, 1300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
 
-         // ================== PANEL ======================= //
+        // ================== PANEL ======================= //
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(0, 0, 1280, 700);
         panel.setBackground(Color.BLACK);
-        panel.setPreferredSize(new Dimension(1280, 700));
+        panel.setPreferredSize(new Dimension(1280, 2200));
         frame.add(panel);
 
         // ================= SCROLLABLE =================== //
@@ -39,45 +34,41 @@ public class HomePage {
         // ================== ABOUT ======================= //
         JLabel aboutLabel = label("About Hotel", 100, 30, 180, 30);
         aboutLabel.addMouseListener(new MouseAdapter() {
-            
-            public void mouseEntered(MouseEvent e)
-            {
+
+            public void mouseEntered(MouseEvent e) {
                 // new AboutHotel();
                 frame.dispose();
-            }   
+            }
         });
-        frame.add(aboutLabel);
+        panel.add(aboutLabel);
 
         // ================== Branches ======================= //
-        JLabel branchesLabel = label("Hotel Branches", 
-                                    250, 
-                                    30, 
-                                    180,
-                                    30
-                                );
+        JLabel branchesLabel = label("Hotel Branches",
+                250,
+                30,
+                180,
+                30);
         branchesLabel.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e)
-            {
+            public void mouseEntered(MouseEvent e) {
                 new HotelBranches();
                 frame.dispose();
             }
         });
-        frame.add(branchesLabel);
+        panel.add(branchesLabel);
 
         // ================== DASHOARD ========================== //
         JLabel dashboardLabel = label("Dashboard", 430, 30, 120, 30);
         dashboardLabel.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e)
-            {
+            public void mouseEntered(MouseEvent e) {
                 new Dashboard();
                 frame.dispose();
             }
         });
-        frame.add(dashboardLabel);
+        panel.add(dashboardLabel);
 
         // ================== About Infracture ==================== //
 
-        String text = """             
+        String text = """
                 <html>
                 Welcome to Al-Zafran Khan Hotel, where comfort,<br>
                 elegance, and heartfelt hospitality come together<br>
@@ -97,11 +88,10 @@ public class HomePage {
 
         JLabel welComeNote = label(text,
                 50,
-                100,
-                650,
-                490
-                );
-        Timer timer = new Timer(100, null);
+                60,
+                630,
+                390);
+        Timer timer = new Timer(10, null);
         timer.addActionListener(new ActionListener() {
 
             int index = 0;
@@ -109,6 +99,7 @@ public class HomePage {
             public void actionPerformed(ActionEvent e) {
                 if (index < text.length()) {
                     welComeNote.setText(text.substring(0, index + 1));
+                    welComeNote.setForeground(Color.BLUE);
                     index++;
                 } else {
                     timer.stop();
@@ -117,44 +108,46 @@ public class HomePage {
         });
 
         timer.start();
-        frame.add(welComeNote);
+        panel.add(welComeNote);
 
         // ====================== OWNER NAME ================== //
         JLabel onwerLabel = label("<html> Owner <br>Zafran Khan</br> </html>",
                 950, 70, 300, 100);
-        frame.add(onwerLabel);
+        panel.add(onwerLabel);
         // ====================== IMAGE ====================== //
         ImageIcon icon = new ImageIcon("HomePage/owner.jpg");
         Image img = icon.getImage().getScaledInstance(200, 250, Image.SCALE_SMOOTH);
         JLabel label = new JLabel(new ImageIcon(img));
         label.setBounds(900, 150, 200, 250);
-        frame.add(label);
+        panel.add(label);
 
         String imges[][] = {
-                 {
-                "HomePage/dinner.png"  , "HomePage/front.png",
-                "HomePage/hotelName.png" , "HomePage/location.png"
-                 },
-                 {
-                    "HomePage/image.png" , "HomePage/reception.png" ,
-                    "HomePage/room.png" , "HomePage/owner.jpg"
-                 }
+                {
+                        "HomePage/dinner.png", "HomePage/front.png", "HomePage/image.png",
+                        "HomePage/hotelName.png", "HomePage/location.png","HomePage/reception.png"
+                },
+                {
+                        "HomePage/image.png", "HomePage/reception.png", "HomePage/reception.png",
+                        "HomePage/room.png", "HomePage/owner.jpg","HomePage/reception.png"
+                },
+                {
+                        "HomePage/image.png", "HomePage/reception.png", "HomePage/reception.png",
+                        "HomePage/room.png", "HomePage/owner.jpg","HomePage/reception.png"
+                }
         };
 
-        for (int i=0; i<imges.length; i++)
-        {
-            for (int j=0; j<imges[i].length; j++)
-            {
+        for (int i = 0; i < imges.length; i++) {
+            for (int j = 0; j <imges[i].length; j++) {
                 JLabel book = createImage(
-                                                imges[i][j],
-                                                i * 250,
-                                                j * 350,
-                                                220,
-                                                300);
-                          frame.add(book);
+                        imges[i][j],
+                        i * 350 +100,
+                        j * 350 +450,
+                        300,
+                        300);
+                panel.add(book);
             }
         }
-        
+
     }
 
     // ======================== LABEL METHOD LOGIC ====================== //
@@ -168,24 +161,23 @@ public class HomePage {
 
             public void mouseEntered(MouseEvent e) {
                 lbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                
+
             }
         });
 
         return lbl;
     }
-        public JLabel createImage(String path, int x, int y, int width, int height) {
 
-                ImageIcon icon = new ImageIcon(path);
+    public JLabel createImage(String path, int x, int y, int width, int height) {
 
-                Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(path);
 
-                JLabel label = new JLabel(new ImageIcon(img));
+        Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
-                label.setBounds(x, y, width, height);
+        JLabel label = new JLabel(new ImageIcon(img));
 
-                return label;
-        }
+        label.setBounds(x, y, width, height);
+
+        return label;
     }
-
-
+}
